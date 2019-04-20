@@ -6,10 +6,20 @@ public class MathOperation {
     private int number1;
     private int number2;
     private float result;
-    private String [] operation = {"+","-","*","/"};
+    private  String operation
+    private String [] operations = {"+","-","*","/"};
 
     Random random = new Random();
-    
+
+
+    public MathOperation() {
+        setNumber1(random.nextInt(10));
+        setNumber2(random.nextInt(10));
+        setOperation(operations[random.nextInt(operations.length)]);
+        while (number2 == 0 && operation.equals("/")){
+            setNumber2(random.nextInt(10));
+        }
+    }
 
     public int getNumber1() {
         return number1;
@@ -35,11 +45,21 @@ public class MathOperation {
         this.result = result;
     }
 
-    public String[] getOperation() {
+    public String getOperation() {
         return operation;
     }
 
-    public void setOperation(String[] operation) {
+    public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    public void generateOperation(){
+        switch (operation){
+            case "+" : result = number1 + number2;break;
+            case "-" : result = number1 - number2;break;
+            case "*" : result = number1 * number2;break;
+            case "/" : result = number1 / number2;break;
+            default:break;
+        }
     }
 }
