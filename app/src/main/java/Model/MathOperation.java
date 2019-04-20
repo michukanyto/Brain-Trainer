@@ -1,12 +1,13 @@
 package Model;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class MathOperation {
     private int number1;
     private int number2;
     private float result;
-    private  String operation
+    private  String operation;
     private String [] operations = {"+","-","*","/"};
 
     Random random = new Random();
@@ -61,5 +62,10 @@ public class MathOperation {
             case "/" : result = number1 / number2;break;
             default:break;
         }
+    }
+
+    @Override
+    public String toString() {
+        return number1 + "  " + operation +  "  " + number2 + "  =  ?";
     }
 }
