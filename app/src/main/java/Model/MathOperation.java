@@ -6,7 +6,7 @@ import java.util.Random;
 public class MathOperation {
     private int number1;
     private int number2;
-    private float result;
+    private int result;
     private String operation;
     private String[] operations = {"+", "-", "*", "/"};
 
@@ -38,11 +38,11 @@ public class MathOperation {
         this.number2 = number2;
     }
 
-    public float getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(float result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

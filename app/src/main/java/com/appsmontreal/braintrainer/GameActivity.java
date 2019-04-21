@@ -19,12 +19,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     int totalQuestion;
     int score;
     int seconds;
+    int indexCorrectAnswer;
     TextView operationTextView;
     TextView secondsTextView;
     TextView scoreTextView;
     MathOperation mathOperation;
     boolean continueGame;
-    Random indexCorrectAnswer;
+    Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         operationTextView = findViewById(R.id.textViewOperation);
         secondsTextView = findViewById(R.id.textViewTime);
         scoreTextView = findViewById(R.id.textViewScore);
+        indexCorrectAnswer = 0;
         correctAnswer = 0;
         score = 0;
         totalQuestion = 0;
         seconds = 20;
         continueGame = true;
-        indexCorrectAnswer = new Random();
+        random = new Random();
         playGame();
     }
 
@@ -58,17 +60,33 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             gameTime();
             operationTextView.setText(mathOperation.toString());
             scoreTextView.setText(String.valueOf(correctAnswer) + " / " + String.valueOf(totalQuestion));
-            buttons[indexCorrectAnswer.nextInt(4)].setText(String.valueOf(mathOperation.getResult()));
-        Log.i("----->",String.valueOf(mathOperation.getResult()));
+            fillUpResults();
 //        }
 
 
+    }
+
+    private void fillUpResults() {
+        indexCorrectAnswer = random.nextInt(4);
+        Log.i("Begin",String.valueOf(indexCorrectAnswer));
+        for (int i = 0; i < 4; i++){
+            Log.i("i ",String.valueOf(i));
+            if (i == indexCorrectAnswer){
+                Log.i("inside",String.valueOf(indexCorrectAnswer));
+                buttons[correctAnswer].setText(String.valueOf(mathOperation.getResult()));
+            }else {
+                buttons[i].setText(String.valueOf(random.nextInt(100)));
+            }
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset: initialize();break;
+            case R.id.buttonStop: break;
+            case R.id.buttonExit: finish();break;
+            default:break;
         }
 
     }
