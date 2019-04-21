@@ -3,7 +3,6 @@ package com.appsmontreal.braintrainer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +14,7 @@ import Model.MathOperation;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     Button [] buttons = new Button[6];
     int [] buttonsId = {R.id.buttonResult1,R.id.buttonResult2,R.id.buttonResult3,R.id.buttonResult4,R.id.buttonStop,R.id.buttonReset,R.id.buttonExit};
-    int correctAnswer;
+    int points;
     int totalQuestion;
     int score;
     int seconds;
@@ -23,9 +22,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     TextView operationTextView;
     TextView secondsTextView;
     TextView scoreTextView;
+    TextView resultMessageTextView;
     MathOperation mathOperation;
     boolean continueGame;
     Random random;
+    CountDownTimer countDownTimer;
+
+    private enum Message{
+        POINT,
+        FAILURE
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,57 +48,87 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         operationTextView = findViewById(R.id.textViewOperation);
         secondsTextView = findViewById(R.id.textViewTime);
         scoreTextView = findViewById(R.id.textViewScore);
+        resultMessageTextView = findViewById(R.id.textViewResult);
         indexCorrectAnswer = 0;
-        correctAnswer = 0;
+        points = 0;
         score = 0;
         totalQuestion = 0;
         seconds = 20;
-        continueGame = true;
         random = new Random();
+        resetGame(true);
         playGame();
     }
 
     private void playGame(){
-//        while (continueGame){
         mathOperation = new MathOperation();
         mathOperation.generateOperation();
-            totalQuestion++;
-            gameTime();
-            operationTextView.setText(mathOperation.toString());
-            scoreTextView.setText(String.valueOf(correctAnswer) + " / " + String.valueOf(totalQuestion));
-            fillUpResults();
-//        }
-
+        gameTimer();
+        operationTextView.setText(mathOperation.toString());
+        scoreTextView.setText(String.valueOf(points) + " / " + String.valueOf(totalQuestion));
+        fillUpResults();
 
     }
 
     private void fillUpResults() {
         indexCorrectAnswer = random.nextInt(4);
-        Log.i("Begin",String.valueOf(indexCorrectAnswer));
         for (int i = 0; i < 4; i++){
-            Log.i("i ",String.valueOf(i));
             if (i == indexCorrectAnswer){
-                Log.i("inside",String.valueOf(indexCorrectAnswer));
-                buttons[correctAnswer].setText(String.valueOf(mathOperation.getResult()));
+                buttons[indexCorrectAnswer].setText(String.valueOf(mathOperation.getResult()));
             }else {
                 buttons[i].setText(String.valueOf(random.nextInt(100)));
             }
         }
     }
 
+    private void resetGame(boolean action){
+        for (int i = 0; i < 4; i++){
+            buttons[i].setEnabled(action);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.buttonReset: initialize();break;
-            case R.id.buttonStop: break;
+            case R.id.buttonReset:
+                initialize();
+                break;
+            case R.id.buttonStop:
+                countDownTimer.cancel();
+                resetGame(false);
+                break;
             case R.id.buttonExit: finish();break;
-            default:break;
+            case R.id.buttonResult1:
+                validateAnswer(buttons[0].getText().toString());
+                playGame();
+                break;
+            case R.id.buttonResult2:
+                validateAnswer(buttons[1].getText().toString());
+                playGame();
+                break;
+            case R.id.buttonResult3:
+                validateAnswer(buttons[2].getText().toString());
+                playGame();
+                break;
+            case R.id.buttonResult4: validateAnswer(buttons[3].getText().toString());
+                playGame();
+                break;
+            default:
+                break;
         }
-
     }
 
-    private void gameTime(){
-        CountDownTimer countDownTimer = new CountDownTimer(20000,1000) {
+    private void validateAnswer(String userAnswer) {
+        if (userAnswer.equals(buttons[indexCorrectAnswer].getText().toString())){
+            points++;
+            resultMessageTextView.setText(Message.POINT.name());
+        }else{
+            resultMessageTextView.setText(Message.FAILURE.name());
+        }
+        totalQuestion++;
+    }
+
+    private void gameTimer(){
+        countDownTimer = new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 secondsTextView.setText(String.valueOf(--seconds));
