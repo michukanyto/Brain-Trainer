@@ -9,6 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Intent intent;
     Button buttonG0;
+    Button buttonMainExit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initialize() {
          buttonG0 = findViewById(R.id.buttonGo);
          buttonG0.setOnClickListener(this);
+        buttonMainExit = findViewById(R.id.buttonMainExit);
+        buttonMainExit.setOnClickListener(this);
 
     }
 
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonGo:
                 intent = new Intent(this,GameActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.buttonMainExit:
+                finish();
                 break;
             default:
                 break;

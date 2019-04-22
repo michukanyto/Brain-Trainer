@@ -14,7 +14,7 @@ import Model.MathOperation;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private final String WINMSG = "SCORE : ";
-    Button [] buttons = new Button[6];
+    Button [] buttons = new Button[7];
     int [] buttonsId = {R.id.buttonResult1,R.id.buttonResult2,R.id.buttonResult3,R.id.buttonResult4,R.id.buttonReset,R.id.buttonStop,R.id.buttonExit};
     int points;
     int totalQuestion;
@@ -103,7 +103,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 disableButtons(false);
                 break;
             case R.id.buttonExit:
-                Log.i("---->","Testing reset button");
                 finish();
                 break;
             case R.id.buttonResult1:
