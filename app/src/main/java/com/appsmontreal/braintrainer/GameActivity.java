@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -101,6 +102,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 countDownTimer.cancel();
                 finalScoreTextView.setText(WINMSG + points + " / " + totalQuestion);
                 disableButtons(false);
+                Toast.makeText(this,"You finished the game, press Exit to go to Main Menu",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonExit:
                 finish();
