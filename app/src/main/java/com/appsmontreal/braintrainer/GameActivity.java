@@ -1,6 +1,7 @@
 package com.appsmontreal.braintrainer;
 
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -103,7 +104,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 countDownTimer.cancel();
                 finalScoreTextView.setText(WINMSG + points + " / " + totalQuestion);
                 disableButtons(false);
-                Toast.makeText(this,STOPMSG,Toast.LENGTH_SHORT).show();
+                Snackbar.make(v,STOPMSG, Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.buttonExit:
                 finish();
