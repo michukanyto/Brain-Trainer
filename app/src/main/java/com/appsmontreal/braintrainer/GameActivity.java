@@ -15,6 +15,7 @@ import Model.MathOperation;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private final String WINMSG = "SCORE : ";
+    private final String STOPMSG = "You finished the game, press Exit to go to the Main Menu";
     Button [] buttons = new Button[7];
     int [] buttonsId = {R.id.buttonResult1,R.id.buttonResult2,R.id.buttonResult3,R.id.buttonResult4,R.id.buttonReset,R.id.buttonStop,R.id.buttonExit};
     int points;
@@ -102,7 +103,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 countDownTimer.cancel();
                 finalScoreTextView.setText(WINMSG + points + " / " + totalQuestion);
                 disableButtons(false);
-                Toast.makeText(this,"You finished the game, press Exit to go to Main Menu",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,STOPMSG,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonExit:
                 finish();

@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
-         buttonG0 = findViewById(R.id.buttonGo);
-         buttonG0.setOnClickListener(this);
+        buttonG0 = findViewById(R.id.buttonGo);
+        buttonG0.setOnClickListener(this);
         buttonMainExit = findViewById(R.id.buttonMainExit);
         buttonMainExit.setOnClickListener(this);
 
