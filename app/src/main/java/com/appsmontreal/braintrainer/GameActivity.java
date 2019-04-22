@@ -3,6 +3,7 @@ package com.appsmontreal.braintrainer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,8 +13,9 @@ import java.util.Random;
 import Model.MathOperation;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+    private final String WINMSG = "SCORE : ";
     Button [] buttons = new Button[6];
-    int [] buttonsId = {R.id.buttonResult1,R.id.buttonResult2,R.id.buttonResult3,R.id.buttonResult4,R.id.buttonStop,R.id.buttonReset,R.id.buttonExit};
+    int [] buttonsId = {R.id.buttonResult1,R.id.buttonResult2,R.id.buttonResult3,R.id.buttonResult4,R.id.buttonReset,R.id.buttonStop,R.id.buttonExit};
     int points;
     int totalQuestion;
     int score;
@@ -22,6 +24,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     TextView operationTextView;
     TextView secondsTextView;
     TextView scoreTextView;
+    TextView finalScoreTextView;
     TextView resultMessageTextView;
     MathOperation mathOperation;
     boolean continueGame;
@@ -49,13 +52,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         secondsTextView = findViewById(R.id.textViewTime);
         scoreTextView = findViewById(R.id.textViewScore);
         resultMessageTextView = findViewById(R.id.textViewResult);
+        finalScoreTextView = findViewById(R.id.textViewFinalScore);
         indexCorrectAnswer = 0;
         points = 0;
         score = 0;
         totalQuestion = 0;
         seconds = 20;
         random = new Random();
-        resetGame(true);
+        disableButtons(true);
         playGame();
     }
 
@@ -80,10 +84,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void resetGame(boolean action){
-        for (int i = 0; i < 4; i++){
+    private void disableButtons(boolean action){
+        for (int i = 0; i < 5; i++){
             buttons[i].setEnabled(action);
         }
+
     }
 
     @Override
@@ -94,9 +99,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.buttonStop:
                 countDownTimer.cancel();
-                resetGame(false);
+                finalScoreTextView.setText(WINMSG + points + " / " + totalQuestion);
+                disableButtons(false);
                 break;
-            case R.id.buttonExit: finish();break;
+            case R.id.buttonExit:
+                Log.i("---->","Testing reset button");
+                finish();
+                break;
             case R.id.buttonResult1:
                 validateAnswer(buttons[0].getText().toString());
                 playGame();
