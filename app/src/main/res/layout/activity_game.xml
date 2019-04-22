@@ -49,9 +49,10 @@
         android:layout_marginTop="36dp"
         android:background="@android:color/holo_blue_light"
         android:gravity="fill"
+        android:padding="10dp"
         android:text="00s"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +65,7 @@
         android:layout_marginEnd="30dp"
         android:background="@android:color/holo_green_light"
         android:gravity="fill"
+        android:padding="10dp"
         android:text="1/2"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -96,18 +98,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:backgroundTint="@android:color/holo_orange_light"
+                android:padding="10dp"
                 android:tag="1"
                 android:text="00"
-                android:textSize="30sp" />
+                android:textSize="56sp" />
 
             <Button
                 android:id="@+id/buttonResult2"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:backgroundTint="@android:color/holo_purple"
+                android:padding="10dp"
                 android:tag="2"
                 android:text="00"
-                android:textSize="30sp" />
+                android:textSize="56sp" />
         </TableRow>
 
         <TableRow
@@ -120,18 +124,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:backgroundTint="@android:color/holo_green_light"
+                android:padding="10dp"
                 android:tag="3"
                 android:text="00"
-                android:textSize="30sp" />
+                android:textSize="56sp" />
 
             <Button
                 android:id="@+id/buttonResult4"
                 android:layout_width="wrap_content"
                 android:layout_height="120dp"
                 android:backgroundTint="@android:color/holo_blue_light"
+                android:padding="10dp"
                 android:tag="4"
                 android:text="00"
-                android:textSize="30sp" />
+                android:textSize="56sp" />
         </TableRow>
 
     </TableLayout>
