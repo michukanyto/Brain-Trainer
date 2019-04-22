@@ -113,11 +113,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 playGame();
                 break;
             default:
+                countDownTimer.cancel();
                 break;
         }
     }
 
     private void validateAnswer(String userAnswer) {
+        countDownTimer.cancel();
         if (userAnswer.equals(buttons[indexCorrectAnswer].getText().toString())){
             points++;
             resultMessageTextView.setText(Message.POINT.name());
@@ -136,9 +138,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-                seconds = 20;
-                secondsTextView.setText(String.valueOf(seconds));
+
             }
         }.start();
+        seconds = 20;
+        secondsTextView.setText(String.valueOf(seconds));
     }
 }
