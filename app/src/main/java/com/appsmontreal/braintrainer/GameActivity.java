@@ -98,6 +98,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset:
+                countDownTimer.cancel();
                 initialize();
                 break;
             case R.id.buttonStop:
