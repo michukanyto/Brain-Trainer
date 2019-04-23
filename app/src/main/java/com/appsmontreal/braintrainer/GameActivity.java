@@ -30,7 +30,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     TextView finalScoreTextView;
     TextView resultMessageTextView;
     MathOperation mathOperation;
-    boolean continueGame;
     Random random;
     CountDownTimer countDownTimer;
 
